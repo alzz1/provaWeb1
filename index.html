@@ -18,12 +18,15 @@
                 <a href="#">Ajuda</a>
             </div>
             <div class="nav-actions">
-                <button class="btn btn-outline">
+                <a class="btn btn-outline" id="login-btn">
                     Login
-                </button>
-                <button class="btn btn-primary">
+                </a>
+                <a class="btn btn-primary" id="register-btn">
                     Cadastrar
-                </button>
+                </a>
+                <div class="profile-avatar hidden" id="profile-avatar">
+                    <img src="https://placehold.co/150x150/ec4899/ffffff?text=User" alt="Foto do Perfil">
+                </div>
                 <button class="menu-toggle">
                     <i data-lucide="menu"></i>
                 </button>
@@ -113,7 +116,6 @@
         </section>
     </main>
 
-    <!-- Rodapé (Footer) -->
     <footer class="site-footer">
         <div class="container footer-container">
             <div class="footer-grid">
