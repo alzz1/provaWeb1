@@ -1,0 +1,347 @@
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #111827; /* Cinza escuro */
+    color: #f9fafb; /* Texto claro */
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* --- Cabeçalho (Header) --- */
+.site-header {
+    background-color: rgba(17, 24, 39, 0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid #374151;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ec4899; /* Rosa */
+}
+
+.nav-links {
+    display: none; /* Escondido em telas pequenas */
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    color: #d1d5db; /* Cinza claro */
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ffffff;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* --- Botões --- */
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background-color: #ec4899;
+    color: white;
+    border: 1px solid #ec4899;
+}
+
+.btn-primary:hover {
+    background-color: #db2777;
+    border-color: #db2777;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: #ec4899;
+    border: 1px solid #ec4899;
+}
+
+.btn-outline:hover {
+    background-color: #ec4899;
+    color: white;
+}
+
+
+/* --- Seção Hero --- */
+.hero-section {
+    padding: 6rem 0;
+    /* Imagem de fundo alterada para uma opção mais limpa e moderna */
+    background: linear-gradient(rgba(17, 24, 39, 0.7), rgba(17, 24, 39, 0.8)), url('https://images.unsplash.com/photo-1554050553-9a7f5a7a16f2?q=80&w=1920&auto=format&fit=crop') no-repeat center center;
+    background-size: cover;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.hero-content p {
+    font-size: 1.125rem;
+    color: #d1d5db;
+    margin-bottom: 2rem;
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-box {
+    max-width: 36rem;
+    margin: auto;
+    background-color: rgba(31, 41, 55, 0.5);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid #4b5563;
+}
+
+.search-box i {
+    color: #9ca3af;
+    margin-left: 0.5rem;
+}
+
+.search-box input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 1rem;
+    padding: 0.75rem 0.25rem;
+}
+
+.search-box input::placeholder {
+    color: #9ca3af;
+}
+
+
+/* --- Seção de Perfis --- */
+.profiles-section {
+    padding: 4rem 0 6rem 0;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #9ca3af;
+    margin-bottom: 3rem;
+}
+
+.profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.profile-card {
+    background-color: #1f2937;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.profile-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+}
+
+.profile-card.online::after {
+    content: '';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 12px;
+    height: 12px;
+    background-color: #22c55e; /* Verde */
+    border-radius: 50%;
+    border: 2px solid #1f2937;
+}
+
+.profile-image {
+    width: 100%;
+    height: 14rem;
+    object-fit: cover;
+    display: block;
+}
+
+.profile-info {
+    padding: 1rem;
+}
+
+.profile-name {
+    font-weight: bold;
+    font-size: 1.125rem;
+    color: white;
+    margin: 0 0 0.25rem 0;
+}
+
+.profile-location {
+    display: flex;
+    align-items: center;
+    color: #9ca3af;
+}
+
+.profile-location .icon {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+}
+
+
+/* --- Rodapé (Footer) --- */
+.site-footer {
+    background-color: #1f2937;
+    border-top: 1px solid #374151;
+    padding: 2rem 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.footer-column h4 {
+    font-weight: bold;
+    color: white;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+    color: #9ca3af;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #ec4899;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-links a {
+    color: #9ca3af;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #ec4899;
+}
+
+.footer-bottom {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #374151;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+
+/* --- Responsividade (Media Queries) --- */
+@media (min-width: 768px) {
+    .nav-links {
+        display: flex;
+    }
+    .btn-outline {
+        display: block;
+    }
+    .menu-toggle {
+        display: none;
+    }
+    .hero-content h1 {
+        font-size: 3.75rem;
+    }
+    .profiles-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .footer-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .profiles-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1280px) {
+    .profiles-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
