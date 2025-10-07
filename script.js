@@ -74,4 +74,38 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = 'index.html';
         });
     }
+const modal = document.getElementById('profile-modal');
+const closeBtn = document.querySelector('.close-btn');
+const modalImage = document.getElementById('modal-image');
+const modalName = document.getElementById('modal-name');
+const modalLocation = document.getElementById('modal-location');
+
+const profileCards = document.querySelectorAll('.profile-card');
+
+profileCards.forEach(card => {
+  card.addEventListener('click', () => {
+    const img = card.querySelector('img').src;
+    const name = card.querySelector('.profile-name').innerText;
+    const location = card.querySelector('.profile-location span').innerText;
+
+    modalImage.src = img;
+    modalName.textContent = name;
+    modalLocation.textContent = location;
+
+    modal.classList.remove('hidden');
+  });
+});
+
+// Fechar o modal
+closeBtn.addEventListener('click', () => {
+  modal.classList.add('hidden');
+});
+
+// Fechar clicando fora do conteúdo
+window.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.classList.add('hidden');
+  }
+});
+
 });
