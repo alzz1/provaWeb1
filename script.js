@@ -1,30 +1,41 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const loginBtn = document.getElementById('login-btn');
-    const registerBtn = document.getElementById('register-btn');
-    const profileAvatarDiv = document.getElementById('profile-avatar');
+  const loginBtn = document.getElementById('login-btn');
+  const registerBtn = document.getElementById('register-btn');
+  const profileAvatarDiv = document.getElementById('profile-avatar');
 
-    if (profileAvatarDiv) {
-        const profileAvatarImg = profileAvatarDiv.querySelector('img');
-        const loggedInUserJSON = localStorage.getItem('loggedInUser');
+  if (profileAvatarDiv) {
+      const profileAvatarImg = profileAvatarDiv.querySelector('img');
+      const loggedInUserJSON = localStorage.getItem('loggedInUser');
 
-        if (loggedInUserJSON) { 
-            const user = JSON.parse(loggedInUserJSON);
+      if (loggedInUserJSON) {
+          const user = JSON.parse(loggedInUserJSON);
 
-            loginBtn.classList.add('hidden');
-            registerBtn.classList.add('hidden');
-           profileAvatarImg.src = user.profilePic;
-profileAvatarDiv.classList.remove('hidden');
+          // Esconde os botões de login/cadastro
+          if (loginBtn) loginBtn.style.display = "none";
+          if (registerBtn) registerBtn.style.display = "none";
 
-profileAvatarDiv.addEventListener('click', () => {
-    window.location.href = 'meu-perfil.html';
+          // Mostra avatar com a foto do usuário
+          profileAvatarImg.src = user.profilePic || "https://placehold.co/150x150/ec4899/ffffff?text=User";
+          profileAvatarDiv.classList.remove('hidden');
+
+         viewProfileBtn.addEventListener('click', () => {
+  const profile = profilesData.find(p => p.name === modalName.textContent);
+  
+  if (profile) {
+    localStorage.setItem('selectedProfile', JSON.stringify(profile));
+    window.location.href = 'perfil.html';
+  }
 });
 
-        } else {
-            loginBtn.classList.remove('hidden');
-            registerBtn.classList.remove('hidden');
-            profileAvatarDiv.classList.add('hidden');
-        }
-    }
+      } else {
+          // Caso não esteja logado, mantém botões visíveis
+          if (loginBtn) loginBtn.style.display = "inline-block";
+          if (registerBtn) registerBtn.style.display = "inline-block";
+          profileAvatarDiv.classList.add('hidden');
+      }
+  }
+});
+
 
     const loginForm = document.getElementById('login-form');
 
@@ -35,17 +46,23 @@ if (loginForm) {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
 
+        // recupera todos os usuários cadastrados
         let users = JSON.parse(localStorage.getItem('users')) || [];
+
+        // procura se existe o usuário com esse email e senha
         const user = users.find(u => u.email === email && u.password === password);
 
         if (user) {
+            // salva o usuário logado
             localStorage.setItem('loggedInUser', JSON.stringify(user));
+            // redireciona para a tela inicial
             window.location.href = 'index.html';
         } else {
             alert('Email ou senha inválidos!');
         }
     });
 }
+
 
   const cadastroForm = document.getElementById('cadastro-form');
 
@@ -186,7 +203,5 @@ viewProfileBtn.addEventListener('click', () => {
   };
   localStorage.setItem('selectedProfile', JSON.stringify(perfilSelecionado));
   window.location.href = 'perfil.html';
-});
+}); 
 
-
-});
