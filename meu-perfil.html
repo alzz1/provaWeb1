@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Perfil - Love X</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: #111827;
+      color: white;
+      font-family: 'Inter', sans-serif;
+    }
+    .perfil-container {
+      max-width: 600px;
+      margin: 4rem auto;
+      background: #1f2937;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+    .perfil-container img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ec4899;
+      margin-bottom: 1rem;
+    }
+    .perfil-container h2 {
+      margin: 0.5rem 0;
+    }
+    .perfil-container p {
+      color: #d1d5db;
+    }
+    .btn-logout {
+      display: block;
+      margin: 2rem auto 0;
+      padding: 0.75rem 1.5rem;
+      background-color: #ef4444;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    .btn-logout:hover {
+      background-color: #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <div class="perfil-container">
+    <img id="user-foto" src="" alt="Foto do Usuário">
+    <h2 id="user-nome"></h2>
+    <p id="user-email"></p>
+    
+    <button class="btn-logout" id="logout-btn">Sair</button>
+  </div>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (!user) {
+      window.location.href = 'login.html';
+    } else {
+      document.getElementById('user-foto').src = user.profilePic;
+      document.getElementById('user-nome').textContent = user.name;
+      document.getElementById('user-email').textContent = user.email;
+    }
+
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      localStorage.removeItem('loggedInUser');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

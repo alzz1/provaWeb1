@@ -1,46 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="cadastro.css">
-    <title>Cadastro - Love X</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="cadastro.css">
+  <title>Cadastro - Love X</title>
 </head>
 <body>
-    <div class="cadastro-container">
-        <div class="cadastro-box">
-            <h2>Crie sua Conta</h2>
-            <div class="profile-upload">
-                <img src="https://placehold.co/150x150/374151/ffffff?text=Perfil" alt="Foto do Perfil" id="profile-preview" class="profile-pic">
-                <input type="file" id="profile-image-upload" accept="image/*" style="display: none;">
-                <label for="profile-image-upload" class="btn btn-outline">Escolher Foto</label>
-            </div>
-            <form>
-                <div class="input-group">
-                    <label for="name">Nome</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="input-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="input-group">
-                    <label for="password">Senha</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <div class="input-group">
-                    <label for="confirm-password">Confirmar Senha</label>
-                    <input type="password" id="confirm-password" name="confirm-password" required>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
-            </form>
-             <div class="cadastro-links">
-                <a href="login.html">Já tem uma conta? Faça Login</a>
-            </div>
-        </div>
-    </div>
+  <div class="cadastro-container">
+    <div class="cadastro-box">
+      <h2>Crie sua Conta</h2>
+      <div class="profile-upload">
+        <img src="https://placehold.co/150x150/374151/ffffff?text=Perfil" alt="Foto do Perfil" id="profile-preview" class="profile-pic">
+        <input type="file" id="profile-image-upload" accept="image/*" style="display: none;">
+        <label for="profile-image-upload" class="btn btn-outline">Escolher Foto</label>
+      </div>
 
- <script src="script.js" defer></script>
+      <!-- 🔹 Campo de seleção de estilo -->
+      <div class="input-group">
+        <label for="theme">Tema do Formulário</label>
+        <select id="theme" name="theme">
+          <option value="default" selected>Default</option>
+          <option value="custom">Custom</option>
+        </select>
+      </div>
+
+      <form id="cadastro-form">
+        <div class="input-group">
+          <label for="name">Nome</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="input-group">
+          <label for="password">Senha</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <div class="input-group">
+          <label for="confirm-password">Confirmar Senha</label>
+          <input type="password" id="confirm-password" name="confirm-password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+      </form>
+
+      <div class="cadastro-links">
+        <a href="login.html">Já tem uma conta? Faça Login</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+
+  <!-- 🔹 Script adicional para controle do tema -->
+  <script>
+    const themeSelect = document.getElementById('theme');
+    const labels = document.querySelectorAll('label');
+    const inputs = document.querySelectorAll('input');
+
+    const defaultStyles = {
+      fontFamily: "'Inter', sans-serif",
+      inputBg: "#374151"
+    };
+
+    const customStyles = {
+      fontFamily: "'Comic Sans MS', cursive",
+      inputBg: "#ec4899"
+    };
+
+    themeSelect.addEventListener('change', function () {
+      if (this.value === 'custom') {
+        labels.forEach(label => label.style.fontFamily = customStyles.fontFamily);
+        inputs.forEach(input => input.style.backgroundColor = customStyles.inputBg);
+      } else {
+        labels.forEach(label => label.style.fontFamily = defaultStyles.fontFamily);
+        inputs.forEach(input => input.style.backgroundColor = defaultStyles.inputBg);
+      }
+    });
+  </script>
 </body>
 </html>

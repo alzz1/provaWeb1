@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento - Love X</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: #111827;
+      color: white;
+      font-family: 'Inter', sans-serif;
+    }
+    .pagamento-container {
+      max-width: 600px;
+      margin: 4rem auto;
+      background: #1f2937;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+    .pagamento-container h2 {
+      color: #ec4899;
+      margin-bottom: 1.5rem;
+    }
+    .opcoes-pagamento {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .opcao {
+      padding: 1rem;
+      background: #374151;
+      border: 1px solid #4b5563;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .opcao:hover {
+      background: #4b5563;
+      border-color: #ec4899;
+    }
+    .opcao.selecionada {
+      border-color: #ec4899;
+      background: #ec4899;
+      color: white;
+    }
+    .btn-confirmar {
+      margin-top: 2rem;
+      background-color: #10b981;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn-confirmar:hover {
+      background-color: #059669;
+    }
+  </style>
+</head>
+<body>
+  <div class="pagamento-container">
+    <h2>Escolha a forma de pagamento</h2>
+
+    <div class="opcoes-pagamento">
+      <div class="opcao" id="pix">💸 Pix</div>
+      <div class="opcao" id="cartao">💳 Cartão de Crédito</div>
+    </div>
+
+    <button class="btn-confirmar" id="confirmar-btn" disabled>Confirmar Pagamento</button>
+
+    <a href="perfil.html" class="btn-voltar" style="display:block;margin-top:1.5rem;">Voltar</a>
+  </div>
+
+  <script>
+    const opcoes = document.querySelectorAll('.opcao');
+    const confirmarBtn = document.getElementById('confirmar-btn');
+    let metodoSelecionado = null;
+
+    opcoes.forEach(opcao => {
+      opcao.addEventListener('click', () => {
+        opcoes.forEach(o => o.classList.remove('selecionada'));
+        opcao.classList.add('selecionada');
+        metodoSelecionado = opcao.id;
+        confirmarBtn.disabled = false;
+      });
+    });
+
+    confirmarBtn.addEventListener('click', () => {
+      localStorage.setItem('metodoPagamento', metodoSelecionado);
+      window.location.href = 'confirmacao.html';
+    });
+  </script>
+</body>
+</html>

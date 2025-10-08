@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmação - Love X</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: #111827;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    .confirmacao-container {
+      max-width: 600px;
+      margin: auto;
+      background: #1f2937;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    }
+    .confirmacao-container h2 {
+      color: #10b981;
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+    .confirmacao-container p {
+      color: #d1d5db;
+      margin-bottom: 2rem;
+    }
+    .btn-retornar {
+      background-color: #ec4899;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .btn-retornar:hover {
+      background-color: #db2777;
+    }
+  </style>
+</head>
+<body>
+  <div class="confirmacao-container">
+    <h2>Pagamento Confirmado! 💖</h2>
+    <p>Seu pagamento via <span id="metodo"></span> foi processado com sucesso.<br>
+    Obrigado por utilizar o Love X!</p>
+
+    <a href="index.html" class="btn-retornar">Voltar à Página Inicial</a>
+  </div>
+
+  <script>
+    const metodo = localStorage.getItem('metodoPagamento');
+    const metodoSpan = document.getElementById('metodo');
+    metodoSpan.textContent = metodo === 'pix' ? 'Pix' : 'Cartão de Crédito';
+    localStorage.removeItem('metodoPagamento');
+  </script>
+</body>
+</html>

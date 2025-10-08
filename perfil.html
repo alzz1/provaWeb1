@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil - Love X</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: #111827;
+      color: white;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .perfil-container {
+      max-width: 800px;
+      margin: 4rem auto;
+      background: #1f2937;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    }
+
+    .perfil-header img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .perfil-info {
+      padding: 2rem;
+    }
+
+    .perfil-info h2 {
+      font-size: 1.75rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .perfil-info p {
+      color: #d1d5db;
+      margin-bottom: 1rem;
+    }
+
+    .perfil-bio {
+      margin-top: 1.5rem;
+      line-height: 1.6;
+      color: #9ca3af;
+    }
+
+    .perfil-section {
+      margin-top: 2rem;
+      border-top: 1px solid #374151;
+      padding-top: 1.5rem;
+    }
+
+    .perfil-section h3 {
+      color: #ec4899;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .perfil-section p {
+      color: #9ca3af;
+      margin: 0;
+    }
+
+    .btn-voltar {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #ec4899;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .btn-voltar:hover {
+      background-color: #db2777;
+    }
+  </style>
+</head>
+<body>
+  <div class="perfil-container">
+    <div class="perfil-header">
+      <img id="perfil-foto" src="" alt="Foto do Perfil">
+    </div>
+    <div class="perfil-info">
+      <h2 id="perfil-nome"></h2>
+      <p id="perfil-idade-local"></p>
+      <p class="perfil-bio" id="perfil-descricao"></p>
+
+      <div class="perfil-section">
+        <h3>💋 O que gosto de fazer</h3>
+        <p id="perfil-gostos"></p>
+      </div>
+
+      <div class="perfil-section">
+        <h3>💞 Tipo de homem que procuro</h3>
+        <p id="perfil-tipo"></p>
+      </div>
+
+      <div class="perfil-section">
+        <h3>🌃 Disponibilidade</h3>
+        <p id="perfil-disponibilidade"></p>
+      </div>
+
+      <a href="index.html" class="btn-voltar">Voltar</a>
+<a href="pagamento.html" class="btn-voltar" style="background-color:#10b981;">
+  Ir para Pagamento
+</a>
+    </div>
+  </div>
+
+  <script>
+    let perfil = JSON.parse(localStorage.getItem('selectedProfile'));
+if (!perfil) {
+  // Se não veio de um card de perfil, mostra o usuário logado
+  perfil = JSON.parse(localStorage.getItem('loggedInUser'));
+}
+
+if (perfil) {
+  document.getElementById('perfil-foto').src = perfil.profilePic || perfil.image;
+  document.getElementById('perfil-nome').textContent = perfil.name;
+  document.getElementById('perfil-idade-local').textContent = perfil.location || perfil.email;
+  document.getElementById('perfil-descricao').textContent = perfil.description || "Usuário cadastrado no Love X.";
+  document.getElementById('perfil-gostos').textContent = perfil.likes || "";
+  document.getElementById('perfil-tipo').textContent = perfil.type || "";
+  document.getElementById('perfil-disponibilidade').textContent = perfil.availability || "";
+} else {
+  window.location.href = 'index.html';
+}
+
+  </script>
+</body>
+</html>

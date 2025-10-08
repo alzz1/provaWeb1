@@ -18,12 +18,15 @@
                 <a href="#">Ajuda</a>
             </div>
             <div class="nav-actions">
-                <a class="btn btn-outline" id="login-btn">
-                    Login
-                </a>
-                <a class="btn btn-primary" id="register-btn">
-                    Cadastrar
-                </a>
+               <a href="login.html" class="btn btn-outline" id="login-btn">
+    Login
+</a>
+<a href="cadastro.html" class="btn btn-primary" id="register-btn">
+    Cadastrar
+</a>
+
+</a>
+
                 <div class="profile-avatar hidden" id="profile-avatar">
                     <img src="https://placehold.co/150x150/ec4899/ffffff?text=User" alt="Foto do Perfil">
                 </div>
@@ -125,6 +128,11 @@
                         <li><a href="#">Sobre nós</a></li>
                         <li><a href="#">Imprensa</a></li>
                         <li><a href="#">Carreiras</a></li>
+                        <p>&copy; 2024 Love X. Todos os direitos reservados.</p>
+      <p>Este é um site de entretenimento adulto. O conteúdo é destinado a maiores de 18 anos.</p>
+      <p class="creditos">
+  Desenvolvido por: Matheus Fernandes Cordeiro & Andre Peixoto
+</p>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -158,19 +166,24 @@
         </div>
     </footer>
     
-    <script src="script.js" defer></script>
     
+    <script src="script.js" defer></script>
+
+
+<!-- Modal de Perfil -->
 <div id="profile-modal" class="modal hidden">
   <div class="modal-content">
     <span class="close-btn">&times;</span>
     <img id="modal-image" src="" alt="Foto do Perfil" class="modal-image">
     <h3 id="modal-name"></h3>
-    <p id="modal-location"></p>
-    <p id="modal-description">
-      Olá! 💕 Sou uma acompanhante discreta e educada. Atendo com hora marcada, em ambiente seguro e confortável.
-    </p>
+    <p id="modal-age-location"></p>
+    <p id="modal-description"></p>
+    <button id="view-profile-btn" class="btn btn-primary" style="margin-top:1rem;">
+      Ver Perfil Completo
+    </button>
   </div>
 </div>
+
 
 </body>
 </html>
