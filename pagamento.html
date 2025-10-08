@@ -61,6 +61,31 @@
     .btn-confirmar:hover {
       background-color: #059669;
     }
+    .detalhes-pagamento {
+      margin-top: 2rem;
+      text-align: left;
+      display: none; /* escondido até escolher opção */
+    }
+    .detalhes-pagamento input,
+    .detalhes-pagamento select {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid #4b5563;
+      background: #374151;
+      color: white;
+      box-sizing: border-box;
+    }
+    .qr-code {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .qr-code img {
+      width: 200px;
+      height: 200px;
+    }
   </style>
 </head>
 <body>
@@ -70,6 +95,32 @@
     <div class="opcoes-pagamento">
       <div class="opcao" id="pix">💸 Pix</div>
       <div class="opcao" id="cartao">💳 Cartão de Crédito</div>
+    </div>
+
+    <!-- 🔹 Detalhes para Cartão -->
+    <div id="detalhes-cartao" class="detalhes-pagamento">
+      <label>Número do Cartão</label>
+      <input type="text" placeholder="0000 0000 0000 0000">
+      <label>Validade</label>
+      <input type="text" placeholder="MM/AA">
+      <label>Código de Segurança (CVV)</label>
+      <input type="text" placeholder="123">
+      <label>Parcelas</label>
+      <select>
+        <option>1x sem juros</option>
+        <option>2x sem juros</option>
+        <option>3x sem juros</option>
+        <option>6x com juros</option>
+        <option>12x com juros</option>
+      </select>
+    </div>
+
+    <!-- 🔹 Detalhes para Pix -->
+    <div id="detalhes-pix" class="detalhes-pagamento">
+      <p>Escaneie o QR Code abaixo para realizar o pagamento:</p>
+      <div class="qr-code">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=PagamentoLoveX" alt="QR Code Pix">
+      </div>
     </div>
 
     <button class="btn-confirmar" id="confirmar-btn" disabled>Confirmar Pagamento</button>
@@ -82,12 +133,19 @@
     const confirmarBtn = document.getElementById('confirmar-btn');
     let metodoSelecionado = null;
 
+    const detalhesCartao = document.getElementById('detalhes-cartao');
+    const detalhesPix = document.getElementById('detalhes-pix');
+
     opcoes.forEach(opcao => {
       opcao.addEventListener('click', () => {
         opcoes.forEach(o => o.classList.remove('selecionada'));
         opcao.classList.add('selecionada');
         metodoSelecionado = opcao.id;
         confirmarBtn.disabled = false;
+
+        // mostrar/esconder blocos
+        detalhesCartao.style.display = metodoSelecionado === 'cartao' ? 'block' : 'none';
+        detalhesPix.style.display = metodoSelecionado === 'pix' ? 'block' : 'none';
       });
     });
 

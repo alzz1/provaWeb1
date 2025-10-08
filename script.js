@@ -193,15 +193,13 @@ modal.addEventListener('click', (e) => {
 
 // Abre página de perfil completo
 viewProfileBtn.addEventListener('click', () => {
-  const perfilSelecionado = {
-    name: modalName.textContent,
-    age: modalAgeLocation.textContent.split(' ')[0],
-    location: modalAgeLocation.textContent.split('•')[1]?.trim() || '',
-    description: modalDescription.textContent,
-    image: modalImage.src
-  };
-  localStorage.setItem('selectedProfile', JSON.stringify(perfilSelecionado));
-  window.location.href = 'perfil.html';
+  const profile = profilesData.find(p => p.name === modalName.textContent);
+  
+  if (profile) {
+    localStorage.setItem('selectedProfile', JSON.stringify(profile));
+    window.location.href = 'perfil.html';
+  }
 });
+
  
 
