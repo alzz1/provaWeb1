@@ -6,21 +6,22 @@
   <title>Meu Perfil - Love X</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    body {
-      background-color: #111827;
-      color: white;
-      font-family: 'Inter', sans-serif;
-    }
     .perfil-container {
       max-width: 600px;
-      margin: 4rem auto;
+      margin: 3rem auto;
       background: #1f2937;
       border-radius: 1rem;
       padding: 2rem;
       box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-      text-align: center;
+      color: white;
     }
-    .perfil-container img {
+    .perfil-foto {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .perfil-foto img {
       width: 120px;
       height: 120px;
       border-radius: 50%;
@@ -28,52 +29,118 @@
       border: 3px solid #ec4899;
       margin-bottom: 1rem;
     }
-    .perfil-container h2 {
-      margin: 0.5rem 0;
+    .input-group {
+      margin-bottom: 1rem;
     }
-    .perfil-container p {
+    .input-group label {
+      display: block;
+      margin-bottom: 0.5rem;
       color: #d1d5db;
     }
-    .btn-logout {
-      display: block;
-      margin: 2rem auto 0;
-      padding: 0.75rem 1.5rem;
-      background-color: #ef4444;
-      color: white;
-      border: none;
+    .input-group input, .input-group textarea {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #374151;
+      border: 1px solid #4b5563;
       border-radius: 0.5rem;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background 0.3s;
+      color: white;
+      font-size: 1rem;
+      box-sizing: border-box;
     }
-    .btn-logout:hover {
-      background-color: #dc2626;
+    .btn-block {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
+    .logout-btn {
+      background-color: #ef4444;
+      margin-top: 1rem;
     }
   </style>
 </head>
 <body>
   <div class="perfil-container">
-    <img id="user-foto" src="" alt="Foto do Usuário">
-    <h2 id="user-nome"></h2>
-    <p id="user-email"></p>
-    
-    <button class="btn-logout" id="logout-btn">Sair</button>
+    <div class="perfil-foto">
+      <img id="profile-pic-preview" src="https://placehold.co/150x150/ec4899/ffffff?text=User" alt="Foto de Perfil">
+      <input type="file" id="profile-pic-upload" accept="image/*">
+    </div>
+
+    <form id="edit-profile-form">
+      <div class="input-group">
+        <label for="name">Nome</label>
+        <input type="text" id="name" required>
+      </div>
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Senha</label>
+        <input type="password" id="password">
+      </div>
+      <div class="input-group">
+        <label for="bio">Bio</label>
+        <textarea id="bio" rows="3"></textarea>
+      </div>
+      <div class="input-group">
+        <label for="location">Localização</label>
+        <input type="text" id="location" placeholder="Ex: São Paulo, SP">
+      </div>
+      <div class="input-group">
+        <label for="interests">Interesses</label>
+        <input type="text" id="interests" placeholder="Ex: música, esportes, viagens">
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Salvar Alterações</button>
+    </form>
+
+    <button id="logout-btn" class="btn btn-block logout-btn">Sair da Conta</button>
   </div>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const logoutBtn = document.getElementById('logout-btn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem('loggedInUser'); // apaga login
+      window.location.href = "index.html";     // volta para home
+    });
+  }
+});
+</script>
+
 
   <script>
-    const user = JSON.parse(localStorage.getItem('loggedInUser'));
-    if (!user) {
-      window.location.href = 'login.html';
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+
+    const profilePicPreview = document.getElementById('profile-pic-preview');
+    const profilePicUpload = document.getElementById('profile-pic-upload');
+    const form = document.getElementById('edit-profile-form');
+
+    if (loggedInUser) {
+      // Preenche os dados existentes
+      document.getElementById('name').value = loggedInUser.name || "";
+      document.getElementById('email').value = loggedInUser.email || "";
+      document.getElementById('password').value = loggedInUser.password || "";
+      document.getElementById('bio').value = loggedInUser.bio || "";
+      document.getElementById('location').value = loggedInUser.location || "";
+      document.getElementById('interests').value = loggedInUser.interests || "";
+      profilePicPreview.src = loggedInUser.profilePic || "https://placehold.co/150x150/ec4899/ffffff?text=User";
     } else {
-      document.getElementById('user-foto').src = user.profilePic;
-      document.getElementById('user-nome').textContent = user.name;
-      document.getElementById('user-email').textContent = user.email;
+      window.location.href = "login.html"; // se não estiver logado, volta pro login
     }
 
-    document.getElementById('logout-btn').addEventListener('click', () => {
-      localStorage.removeItem('loggedInUser');
-      window.location.href = 'index.html';
-    });
-  </script>
-</body>
-</html>
+    // Alterar foto de perfil
+  profilePicUpload.addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            profilePicPreview.src = e.target.result;
+            loggedInUser.profilePic = e.target.result; // 🔹 atualiza foto no objeto
+            localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser)); // 🔹 salva
+        }
+        reader.readAsDataURL(file);
+    }
+    
+});

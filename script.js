@@ -8,7 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const loggedInUserJSON = localStorage.getItem('loggedInUser');
 
       if (loggedInUserJSON) {
-          const user = JSON.parse(loggedInUserJSON);
+          const user = JSON.parse(loggedInUserJSON)
+          
+          loginBtn.classList.add('hidden');
+    registerBtn.classList.add('hidden');
 
           // Esconde os botões de login/cadastro
           if (loginBtn) loginBtn.style.display = "none";
@@ -18,14 +21,10 @@ document.addEventListener('DOMContentLoaded', function() {
           profileAvatarImg.src = user.profilePic || "https://placehold.co/150x150/ec4899/ffffff?text=User";
           profileAvatarDiv.classList.remove('hidden');
 
-         viewProfileBtn.addEventListener('click', () => {
-  const profile = profilesData.find(p => p.name === modalName.textContent);
-  
-  if (profile) {
-    localStorage.setItem('selectedProfile', JSON.stringify(profile));
-    window.location.href = 'perfil.html';
-  }
-});
+          // Clique no avatar abre a tela de perfil do usuário
+          profileAvatarDiv.addEventListener('click', () => {
+              window.location.href = 'meu-perfil.html';
+          });
 
       } else {
           // Caso não esteja logado, mantém botões visíveis
@@ -203,5 +202,6 @@ viewProfileBtn.addEventListener('click', () => {
   };
   localStorage.setItem('selectedProfile', JSON.stringify(perfilSelecionado));
   window.location.href = 'perfil.html';
-}); 
+});
+ 
 
